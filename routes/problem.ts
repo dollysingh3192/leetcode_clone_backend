@@ -8,4 +8,18 @@ problem.get('/', async (req, res) => {
   res.json(problems);
 });
 
+problem.get("/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        const problem = await prisma.problem.findUnique({
+            where: {
+                id: id,
+            },
+        });
+        res.json(problem);
+    } catch (e) {
+        console.log(e);
+    }
+});
+
 export default problem;

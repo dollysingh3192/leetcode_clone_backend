@@ -19,4 +19,18 @@ problem.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const problems = yield prisma_1.default.problem.findMany();
     res.json(problems);
 }));
+problem.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    try {
+        const problem = yield prisma_1.default.problem.findUnique({
+            where: {
+                id: id,
+            },
+        });
+        res.json(problem);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}));
 exports.default = problem;
